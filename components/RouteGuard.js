@@ -1,11 +1,12 @@
+// components/RouteGuard.js
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
-import { isAuthenticated } from '@/lib/authenticate'; // Adjust the import path as needed
-import { favouritesAtom, searchHistoryAtom } from '@/store'; // Adjust the import path as needed
-import { getFavourites, getHistory } from '@/lib/userData'; // Adjust the import path as needed
+import { isAuthenticated } from '@/lib/authenticate';
+import { favouritesAtom, searchHistoryAtom } from '@/store';
+import { getFavourites, getHistory } from '@/lib/userData';
 
-const PUBLIC_PATHS = ['/', '/login', '/_error', '/register'];
+const PUBLIC_PATHS = ['/', '/login', '/register', '/_error'];
 
 export default function RouteGuard({ children }) {
   const router = useRouter();
@@ -13,7 +14,6 @@ export default function RouteGuard({ children }) {
   const [, setSearchHistoryList] = useAtom(searchHistoryAtom);
 
   useEffect(() => {
-    // Function to update atoms
     const updateAtoms = async () => {
       if (isAuthenticated()) {
         const favourites = await getFavourites();
@@ -23,8 +23,8 @@ export default function RouteGuard({ children }) {
       }
     };
 
-    const authCheck = () => {
-      const path = router.asPath.split('?')[0];
+    const authCheck = (url) => {
+      const path = url.split('?')[0];
       if (!isAuthenticated() && !PUBLIC_PATHS.includes(path)) {
         router.push('/login');
       } else {
@@ -32,17 +32,13 @@ export default function RouteGuard({ children }) {
       }
     };
 
-    authCheck();
+    authCheck(router.asPath);
 
-    // on route change complete - run auth check
-    const handleRouteChange = () => authCheck();
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    // unsubscribe from events in useEffect return function
+    router.events.on('routeChangeComplete', authCheck);
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('routeChangeComplete', authCheck);
     };
-  }, [router, setFavouritesList, setSearchHistoryList]);
+  }, []);
 
   return isAuthenticated() ? children : null;
 }

@@ -9,7 +9,7 @@
 *  Name: _______Rutarj Mrushad Shah_______________ Student ID: _____170870216_________ Date: _______05-04-2024_________
 *
 *  Vercel App (Deployed) Link: _______https://web-422-assignment6-three.vercel.app/______________________________________________
-*
+*  Github Link: https://github.com/rutarj/WEB422-Assignment6
 ********************************************************************************/ 
  
 

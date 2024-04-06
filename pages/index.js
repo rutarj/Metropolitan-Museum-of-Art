@@ -1,17 +1,17 @@
 /*********************************************************************************
-*  WEB422 – Assignment 5
+*  WEB422 – Assignment 6
 *
 *  I declare that this assignment is my own work in accordance with Seneca's
 *  Academic Integrity Policy:
 * 
 *  https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 * 
-*  Name: _______Rutarj Mrushad Shah_______________ Student ID: ____170870216______________ Date: ___22/03/2024___________
-* GITHUB - https://github.com/rutarj/WEB422-Assignment5 
-* DEPLOYMENT LINK - https://web-422-assignment5-nine.vercel.app/ 
-
+*  Name: _______Rutarj Mrushad Shah_______________ Student ID: _____170870216_________ Date: _______05-04-2024_________
+*
+*  Vercel App (Deployed) Link: _____________________________________________________
 *
 ********************************************************************************/ 
+ 
 
 
 import { Row, Col, Image } from 'react-bootstrap';

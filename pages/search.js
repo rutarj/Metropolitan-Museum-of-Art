@@ -46,14 +46,9 @@ const AdvancedSearch = () => {
           <Form.Control type="text" {...register("searchQuery")} />
         </Form.Group>
       </Row>
-      // Remainder of the component unchanged...
+      {/* Remainder of the component unchanged... */}
     </Form>
   );
 }
 
 export default AdvancedSearch;
-
-
-
-
-

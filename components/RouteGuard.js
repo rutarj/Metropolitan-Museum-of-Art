@@ -1,4 +1,3 @@
-// components/RouteGuard.js
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
@@ -24,8 +23,8 @@ export default function RouteGuard({ children }) {
       }
     };
 
-    const authCheck = (url) => {
-      const path = url.split('?')[0];
+    const authCheck = () => {
+      const path = router.asPath.split('?')[0];
       if (!isAuthenticated() && !PUBLIC_PATHS.includes(path)) {
         router.push('/login');
       } else {
@@ -33,15 +32,17 @@ export default function RouteGuard({ children }) {
       }
     };
 
-    authCheck(router.asPath);
+    authCheck();
 
     // on route change complete - run auth check
-    router.events.on('routeChangeComplete', authCheck);
+    const handleRouteChange = () => authCheck();
+    router.events.on('routeChangeComplete', handleRouteChange);
+
     // unsubscribe from events in useEffect return function
     return () => {
-      router.events.off('routeChangeComplete', authCheck);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, []);
+  }, [router, setFavouritesList, setSearchHistoryList]);
 
   return isAuthenticated() ? children : null;
 }

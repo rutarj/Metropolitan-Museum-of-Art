@@ -11,7 +11,7 @@ export default function ArtworkCardDetail({ objectID }) {
   const { data, error } = useSWR(
     objectID
       ? `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
-      : null, 
+      : null
   );
 
   const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
@@ -19,7 +19,7 @@ export default function ArtworkCardDetail({ objectID }) {
 
   useEffect(() => {
     setShowAdded(favouritesList?.includes(objectID));
-  }, [favouritesList]);
+  }, [favouritesList, objectID]); // Include objectID in the dependency array
 
   const favouritesClicked = async () => {
     try {

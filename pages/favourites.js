@@ -15,7 +15,7 @@ export default function Favourites() {
       setFavouritesList(fetchedFavourites);
     };
     fetchFavourites();
-  }, []);
+  }, [setFavouritesList]); // Include setFavouritesList in the dependency array
 
   // Function to handle adding an item to favourites
   const handleAddToFavourites = async (id) => {
